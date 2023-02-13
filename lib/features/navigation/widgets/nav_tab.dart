@@ -6,17 +6,20 @@ class NavTab extends StatelessWidget {
   final String tabName;
   final IconData icon;
   final bool isSelected;
+  final void Function() onTapFn;
 
   const NavTab({
     super.key,
     required this.tabName,
     required this.icon,
     required this.isSelected,
+    required this.onTapFn,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onTapFn,
       child: AnimatedOpacity(
         opacity: isSelected ? 1 : 0.6,
         duration: const Duration(milliseconds: 500),

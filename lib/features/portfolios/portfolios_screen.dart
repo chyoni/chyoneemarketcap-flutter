@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class PricesScreen extends StatelessWidget {
-  const PricesScreen({super.key});
+class PortfoliosScreen extends StatelessWidget {
+  const PortfoliosScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Markets")),
+      appBar: AppBar(title: const Text("Portfolios")),
       body: Container(
         child: const Center(
-          child: Text("Markets"),
+          child: Text("Portfolios"),
         ),
       ),
     );
