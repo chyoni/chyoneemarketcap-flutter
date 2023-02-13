@@ -1,7 +1,16 @@
-import 'package:chyoneemarketcap/features/markets/market_screen.dart';
+import 'package:chyoneemarketcap/features/navigation/navigation_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+    ],
+  );
   runApp(const MyApp());
 }
 
@@ -12,10 +21,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'ChyoneeMarketCap',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const MarketScreen());
+      title: 'ChyoneeMarketCap',
+      theme: ThemeData(
+        useMaterial3: true,
+        scaffoldBackgroundColor: Colors.white,
+        primaryColor: const Color(0xFF3961FB),
+        textTheme: GoogleFonts.mavenProTextTheme(),
+      ),
+      home: const NavigationScreen(),
+    );
   }
 }
