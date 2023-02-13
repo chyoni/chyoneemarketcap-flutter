@@ -3,8 +3,31 @@ import 'package:chyoneemarketcap/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class PricesScreen extends StatelessWidget {
+final tabs = [
+  "Coins",
+  "Watchlists",
+  "Chains",
+  "Dex Pairs",
+  "Categories",
+  "Exchanges",
+];
+
+class PricesScreen extends StatefulWidget {
   const PricesScreen({super.key});
+
+  @override
+  State<PricesScreen> createState() => _PricesScreenState();
+}
+
+class _PricesScreenState extends State<PricesScreen>
+    with TickerProviderStateMixin {
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: tabs.length, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +56,9 @@ class PricesScreen extends StatelessWidget {
               children: [
                 GestureDetector(
                   child: Icon(
-                    FontAwesomeIcons.gem,
+                    Icons.diamond,
                     color: Theme.of(context).primaryColor,
+                    size: Sizes.size28,
                   ),
                 ),
                 Gaps.h20,
@@ -49,6 +73,23 @@ class PricesScreen extends StatelessWidget {
           )
         ],
         centerTitle: true,
+        bottom: TabBar(
+          controller: _tabController,
+          splashFactory: NoSplash.splashFactory,
+          isScrollable: true,
+          padding: const EdgeInsets.symmetric(
+            horizontal: Sizes.size16,
+          ),
+          labelPadding: const EdgeInsets.symmetric(
+            horizontal: Sizes.size16,
+            vertical: Sizes.size16,
+          ),
+          indicatorColor: Theme.of(context).primaryColor,
+          indicatorWeight: 4,
+          tabs: [
+            for (var tab in tabs) Text(tab),
+          ],
+        ),
       ),
       body: const Center(
         child: Text("Markets"),

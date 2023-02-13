@@ -26,7 +26,14 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         scaffoldBackgroundColor: Colors.white,
         primaryColor: const Color(0xFF3961FB),
-        textTheme: GoogleFonts.mavenProTextTheme(),
+        textTheme: GoogleFonts.aBeeZeeTextTheme(),
+        tabBarTheme: TabBarTheme(
+          labelColor: Colors.black,
+          labelStyle: const TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
+          unselectedLabelColor: Colors.grey.shade500,
+        ),
       ),
       home: const NavigationScreen(),
     );
