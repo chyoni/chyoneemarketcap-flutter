@@ -1,4 +1,5 @@
 import 'package:chyoneemarketcap/features/navigation/navigation_screen.dart';
+import 'package:chyoneemarketcap/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,12 +12,13 @@ void main() async {
       DeviceOrientation.portraitUp,
     ],
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
+  final Future<dynamic> a = ApiService.getAllCoins();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
