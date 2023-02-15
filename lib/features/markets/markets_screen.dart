@@ -24,14 +24,27 @@ class PricesScreen extends StatefulWidget {
 
 class _PricesScreenState extends State<PricesScreen>
     with TickerProviderStateMixin {
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<AnimatedListState> _animatedKey =
+      GlobalKey<AnimatedListState>();
   late final TabController _tabController;
 
-  final Future<List<CoinListModel>> coinlist = ApiService.getAllCoins();
+  Future<List<CoinListModel>> coinlist = ApiService.getAllCoins();
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: tabs.length, vsync: this);
+  }
+
+  Future<void> _onRefresh() async {
+    await Future.delayed(
+      const Duration(seconds: 3),
+    );
+    setState(() {
+      coinlist = ApiService.getAllCoins();
+    });
   }
 
   @override
@@ -105,19 +118,33 @@ class _PricesScreenState extends State<PricesScreen>
               future: coinlist,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return ListView.separated(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Sizes.size20,
-                      vertical: Sizes.size12,
+                  return RefreshIndicator(
+                    key: _refreshIndicatorKey,
+                    onRefresh: _onRefresh,
+                    child: AnimatedList(
+                      key: _animatedKey,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Sizes.size20,
+                        vertical: Sizes.size12,
+                      ),
+                      initialItemCount: snapshot.data!.length,
+                      itemBuilder:
+                          (context, index, Animation<double> animation) {
+                        final item = snapshot.data![index];
+                        return Column(
+                          children: [
+                            FadeTransition(
+                              key: UniqueKey(),
+                              opacity: animation,
+                              child: CoinRecord(item: item),
+                            ),
+                            const SizedBox(
+                              height: Sizes.size16,
+                            ),
+                          ],
+                        );
+                      },
                     ),
-                    itemCount: snapshot.data!.length,
-                    separatorBuilder: (context, index) => const SizedBox(
-                      height: Sizes.size16,
-                    ),
-                    itemBuilder: (context, index) {
-                      final item = snapshot.data![index];
-                      return CoinRecord(item: item);
-                    },
                   );
                 } else {
                   return const Center(
