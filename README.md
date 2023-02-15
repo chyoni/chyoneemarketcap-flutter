@@ -2,6 +2,10 @@
 
 ### 코인 가격 및 커뮤니티 앱 만들기
 
+- API references : </br>
+    https://api.coinpaprika.com/ </br>
+    https://www.livecoinwatch.com/tools/api
+
 ### #01 Init
 
 ```bash
