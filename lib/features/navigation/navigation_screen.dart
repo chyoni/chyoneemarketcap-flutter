@@ -1,7 +1,7 @@
 import 'package:chyoneemarketcap/constants/sizes.dart';
 import 'package:chyoneemarketcap/features/communities/communities_screen.dart';
 import 'package:chyoneemarketcap/features/explores/explore_screen.dart';
-import 'package:chyoneemarketcap/features/markets/prices_screen.dart';
+import 'package:chyoneemarketcap/features/markets/markets_screen.dart';
 import 'package:chyoneemarketcap/features/navigation/widgets/nav_tab.dart';
 import 'package:chyoneemarketcap/features/portfolios/portfolios_screen.dart';
 import 'package:flutter/material.dart';

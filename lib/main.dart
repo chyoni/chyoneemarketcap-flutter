@@ -12,13 +12,12 @@ void main() async {
       DeviceOrientation.portraitUp,
     ],
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
-  final Future<dynamic> a = ApiService.getAllCoins();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

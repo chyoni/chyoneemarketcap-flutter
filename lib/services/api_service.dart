@@ -19,8 +19,8 @@ class ApiService {
       "sort": "rank",
       "order": "ascending",
       "offset": 0,
-      "limit": 2,
-      "meta": false,
+      "limit": 100,
+      "meta": true,
     };
     String jsonBody = json.encode(body);
     final response = await http.post(
