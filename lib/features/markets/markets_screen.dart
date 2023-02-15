@@ -136,7 +136,10 @@ class _PricesScreenState extends State<PricesScreen>
                             FadeTransition(
                               key: UniqueKey(),
                               opacity: animation,
-                              child: CoinRecord(item: item),
+                              child: SizeTransition(
+                                sizeFactor: animation,
+                                child: CoinRecord(item: item),
+                              ),
                             ),
                             const SizedBox(
                               height: Sizes.size16,
