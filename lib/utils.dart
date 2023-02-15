@@ -21,4 +21,35 @@ class Utils {
     }
     return result;
   }
+
+  static String getPriceFormat(double price) {
+    String basePrice = price.toString();
+    int dot = basePrice.indexOf(".");
+    String result;
+    switch (dot) {
+      case 5:
+        result =
+            "${basePrice.substring(0, 2)},${basePrice.substring(2, 5)}${basePrice.substring(dot, dot + 3)}";
+        break;
+      case 4:
+        result =
+            "${basePrice.substring(0, 1)},${basePrice.substring(1, 4)}${basePrice.substring(dot, dot + 3)}";
+        break;
+      case 3:
+        result =
+            "${basePrice.substring(0, dot)}${basePrice.substring(dot, dot + 3)}";
+        break;
+      case 2:
+        result =
+            "${basePrice.substring(0, dot)}${basePrice.substring(dot, dot + 3)}";
+        break;
+      case 1:
+        result =
+            "${basePrice.substring(0, dot)}${basePrice.substring(dot, dot + 5)}";
+        break;
+      default:
+        result = basePrice;
+    }
+    return result;
+  }
 }

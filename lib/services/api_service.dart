@@ -30,12 +30,27 @@ class ApiService {
       encoding: Encoding.getByName('utf-8'),
     );
     if (response.statusCode == 200) {
-      final List<dynamic> coins = jsonDecode(response.body);
-      for (var coin in coins) {
-        final c = CoinListModel.fromJson(coin);
-        coinlist.add(c);
+      final tickerResponse = await http
+          .get(Uri.parse("https://api.coinpaprika.com/v1/tickers?limit=100"));
+      if (tickerResponse.statusCode == 200) {
+        final List<dynamic> coins = jsonDecode(response.body);
+        final List<dynamic> tickers = jsonDecode(tickerResponse.body);
+        for (int i = 0; i < coins.length; i++) {
+          final c = CoinListModel(
+            cap: coins[i]['cap'],
+            code: coins[i]['code'],
+            png64: coins[i]['png64'],
+            rank: coins[i]['rank'],
+            rate: coins[i]['rate'],
+            volume: coins[i]['volume'],
+            change_24h: tickers[i]['quotes']['USD']['percent_change_24h'],
+          );
+          coinlist.add(c);
+        }
+        return coinlist;
+      } else {
+        throw Error();
       }
-      return coinlist;
     }
     throw Error();
   }
