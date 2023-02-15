@@ -61,10 +61,38 @@ class CoinRecord extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(
-                    item.change_24h.toString(),
-                    style: const TextStyle(
-                      fontSize: Sizes.size16,
+                  Container(
+                    padding: const EdgeInsets.all(Sizes.size10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        Sizes.size5,
+                      ),
+                      color: item.change_24h > 0
+                          ? Colors.green.shade200
+                          : Colors.red.shade200,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        item.change_24h > 0
+                            ? Icon(
+                                Icons.arrow_drop_up_sharp,
+                                color: Colors.green.shade900,
+                              )
+                            : Icon(Icons.arrow_drop_down_sharp,
+                                color: Colors.red.shade900),
+                        Text(
+                          item.change_24h > 0
+                              ? "+${item.change_24h.toString()}"
+                              : item.change_24h.toString(),
+                          style: TextStyle(
+                            color: item.change_24h > 0
+                                ? Colors.green.shade900
+                                : Colors.red.shade900,
+                            fontSize: Sizes.size16,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
