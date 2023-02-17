@@ -1,5 +1,6 @@
 import 'package:chyoneemarketcap/constants/gaps.dart';
 import 'package:chyoneemarketcap/constants/sizes.dart';
+import 'package:chyoneemarketcap/features/markets/left_nav_bar_screen.dart';
 import 'package:chyoneemarketcap/features/markets/widgets/coin_card.dart';
 import 'package:chyoneemarketcap/models/coin_list_model.dart';
 import 'package:chyoneemarketcap/services/api_service.dart';
@@ -28,6 +29,7 @@ class _PricesScreenState extends State<PricesScreen>
       GlobalKey<RefreshIndicatorState>();
   final GlobalKey<AnimatedListState> _animatedKey =
       GlobalKey<AnimatedListState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   late final TabController _tabController;
 
   Future<List<CoinListModel>> coinlist = ApiService.getAllCoins();
@@ -47,13 +49,20 @@ class _PricesScreenState extends State<PricesScreen>
     });
   }
 
+  void _onUserTap() {
+    _scaffoldKey.currentState!.openDrawer();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
+        key: _scaffoldKey,
+        drawer: const LeftNavBarScreen(),
         appBar: AppBar(
           leading: GestureDetector(
+            onTap: _onUserTap,
             child: Icon(
               FontAwesomeIcons.solidCircleUser,
               size: Sizes.size28,
