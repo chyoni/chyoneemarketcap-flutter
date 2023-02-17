@@ -1,5 +1,6 @@
 import 'package:chyoneemarketcap/constants/gaps.dart';
 import 'package:chyoneemarketcap/constants/sizes.dart';
+import 'package:chyoneemarketcap/features/authentication/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -26,6 +27,14 @@ class _LeftNavBarScreenState extends State<LeftNavBarScreen> {
     });
   }
 
+  void _onLogInRegisterTap() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const LogInScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -40,11 +49,14 @@ class _LeftNavBarScreenState extends State<LeftNavBarScreen> {
                   size: Sizes.size96,
                 ),
                 Gaps.v9,
-                const Text(
-                  "Log In / Register",
-                  style: TextStyle(
-                    fontSize: Sizes.size28,
-                    fontWeight: FontWeight.w600,
+                GestureDetector(
+                  onTap: _onLogInRegisterTap,
+                  child: const Text(
+                    "Log In / Register",
+                    style: TextStyle(
+                      fontSize: Sizes.size28,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
                 Gaps.v20,
